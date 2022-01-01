@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Departments{% endblock %}
+
+{% block app_content %}
+    <h1 style="text-align: center">Departments</h1>
+    <form class="form form-horizontal" method="post" role="form">
+      {{ form.hidden_tag() }}
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    {% if action == 'edit' %}
+                        <th><h3>Edit name of {{ department.title }} department:</h3></th>
+                    {% else %}
+                        <th><h3>Create department:</h3></th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ wtf.form_field(form.title, form_type="horizontal", horizontal_columns=('lg', 1000, 12)) }}</td>
+                    <td>{{ wtf.form_field(form.submit, form_type="horizontal", button_map={"submit": "success"}, horizontal_columns=('lg', 1, 6)) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    {% if departments %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Department name</th>
+                    <th>Salary</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                    <tr>
+                        <td>
+                            <a href="{{ url_for('views.view_department_details', dep_id=department.id_) }}">
+                                {{ department.title }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ department.avg_salary }}
+                        </td>
+                        <td>
+                            <a href="{{ url_for('views.edit_department', dep_id=department.id_) }}">
+                                <button type="button" class="btn btn-secondary">Edit</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('views.delete_department', dep_id=department.id_) }}">
+                                <button onclick="return confirm('Are you sure you wish to delete?')" type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>Departments ware not been found.</h2>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Employees{% endblock %}
+
+{% block app_content %}
+    <h1 style="text-align: center">{{  'Employees sorted by date of birth' if action == 'search_result' else 'Employees'  }}</h1>
+    {% if form %}
+    <h3>Add employee:</h3>
+    <form class="form" method="post" action="{{ url_for(request.endpoint, emp_id=emp_id, from_dep=from_dep) }}">
+        {{ form.hidden_tag() }}
+        <table class="table">
+            <thead>
+            <tr>
+                <th style="padding-left: 25px" colspan="2">Employee Name</th>
+                <th></th>
+                <th style="padding-left: 25px">Date of Birth</th>
+                <th style="padding-left: 25px">Salary</th>
+                <th style="padding-left: 25px">Department</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="2">{{ wtf.form_field(form.full_name, form_type="horizontal", horizontal_columns=('lg', 0, 12)) }}</td>
+                <td></td>
+                <td>{{ wtf.form_field(form.date_of_birth, form_type="horizontal", horizontal_columns=('lg', 0, 12)) }}</td>
+                <td>{{ wtf.form_field(form.salary, form_type="horizontal", horizontal_columns=('lg', 0, 12)) }}</td>
+                <td>{{ wtf.form_field(form.department_id, form_type="horizontal", horizontal_columns=('lg', 0, 12)) }}</td>
+                <td>{{ wtf.form_field(form.submit, form_type="horizontal", button_map={"submit": "success"}, horizontal_columns=('lg', 0, 6)) }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    {% endif %}
+    {% if sform %}
+    <h3>Search employees by date of birth</h3>
+    <form class="form-inline" method='get' action="{{ url_for('views.search_employees') }}">
+        {{ sform.csrf_token }}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date of birth</th>
+                    <th>Date for interval</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ wtf.form_field(sform.date_of_birth, form_type="horizontal", horizontal_columns=('lg', 0, 12)) }}</td>
+                    <td>{{ wtf.form_field(sform.date_for_interval, form_type="horizontal", horizontal_columns=('lg', 0, 12)) }}</td>
+                    <td>{{ wtf.form_field(sform.submit, form_type="horizontal", button_map={"submit": "success"}, horizontal_columns=('lg', 0, 6)) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    {% endif %}
+    {% if employees %}
+        <br><br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Employee name</th>
+                    <th>Date of birth</th>
+                    <th>Salary</th>
+                    <th>Department</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.full_name }}</td>
+                        <td>{{ employee.date_of_birth }}</td>
+                        <td>{{ employee.salary }}</td>
+                        <td>
+                            <a href="{{ url_for('views.view_department_details', dep_id=employee.department.id_) }}">{{ employee.department.title }}</a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('views.edit_employee', emp_id=employee.id_)}}">
+                                <button type="button" class="btn btn-secondary">Edit</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('views.delete_employee', emp_id=employee.id_) }}">
+                                <button onclick="return confirm('Are you sure you wish to delete the employee?')" type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>Employees ware not been found.</h2>
+    {% endif %}
+{% endblock %}
