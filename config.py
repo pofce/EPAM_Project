@@ -1,6 +1,8 @@
+"""Module contains classes to store configurations"""
+
+
 class Config:
     """Main configuration"""
-
     SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:dkfl007@localhost/project_app"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "big_secret"
