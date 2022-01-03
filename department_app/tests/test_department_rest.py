@@ -95,7 +95,7 @@ class TestDepartmentApi(BaseTestCase):
 
     def test_departments_put_with_nonexistent_id(self):
         """
-        Test put request with correct data (nonexistent department id).
+        Test put request with incorrect data (nonexistent department id).
         """
         wrong_id = 42
         data = {"title": "Python Updated"}
