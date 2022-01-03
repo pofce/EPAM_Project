@@ -55,13 +55,14 @@ class TestDEmployeeApi(BaseTestCase):
         assert response.status_code == 400
 
     def test_employees_post_nonexistent_department_id(self):
+        client = create_app().test_client()
         data = {
             "full_name": "New Employee",
             "date_of_birth": "1994-04-05",
             "salary": 500,
             "department_id": 42,
         }
-        response = self.client.post("/api/v1/employees", json=data)
+        response = client.post("/api/v1/employees", json=data)
         assert response.status_code == 400
         assert response.json["message"] == "Not valid department id"
 
