@@ -24,3 +24,4 @@ class Employee(db.Model):
     date_of_birth = db.Column(db.Date, nullable=False, index=True)
     salary: int = db.Column(db.Integer, nullable=False, index=True)
     department_id: int = db.Column(db.Integer, db.ForeignKey('departments.id_'), nullable=False)
+

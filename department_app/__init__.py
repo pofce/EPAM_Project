@@ -8,14 +8,14 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 
-import department_app.models as model
-from config import TestConfig
+from department_app.models import db
+from config import Config
 
 migrate = Migrate()
 bootstrap = Bootstrap()
 
 
-def create_app(config_class=TestConfig):
+def create_app(config_class=Config):
     """
     Function to create a Flask application instance with provided configuration.
     In the function the extensions are initialized with the app instance, the errors
@@ -24,8 +24,8 @@ def create_app(config_class=TestConfig):
     """
     app = Flask(__name__)
     app.config.from_object(config_class)
-    model.db.init_app(app)
-    migrate.init_app(app, model.db)
+    db.init_app(app)
+    migrate.init_app(app, db)
     bootstrap.init_app(app)
     with app.app_context():
         from .rest import api

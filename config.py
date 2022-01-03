@@ -11,7 +11,7 @@ class Config:
 class TestConfig(Config):
     """Configuration for testing"""
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite://"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"
     WTF_CSRF_ENABLED = False
 
 
