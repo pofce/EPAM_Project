@@ -48,7 +48,7 @@ class EmployeeApi(Resource):
         try:
             data = self.emp_schema.load(json_data)
         except ValidationError as e:
-            return e.messages
+            return e.messages, 400
         try:
             new_employee = EmployeeServices.create(data)
         except IntegrityError:
