@@ -1,9 +1,6 @@
 """
 Module contains class to test employee api.
 """
-import json
-from distutils.version import LooseVersion
-
 
 
 from department_app.tests.conftest import BaseTestCase, create_app
@@ -28,7 +25,7 @@ class TestDEmployeeApi(BaseTestCase):
         """
         Test get by id request.
         """
-        emp_id = 1
+        emp_id = 3
         response = self.client.get(f"/api/v1/employees/{emp_id}")
         assert response.status_code == 200
         assert response.json["id_"] == emp_id
@@ -154,21 +151,21 @@ class TestDEmployeeApi(BaseTestCase):
         response = self.client.put(f"/api/v1/employees/{emp_id}", json=data)
         assert response.status_code == 400
 
-    def test_employees_put_with_id_nonexistent_department_id(self):
-        """
-        Test put request with incorrect data (wrong dep_id).
-        """
-        client = create_app().test_client()
-        emp_id = 1
-        data = {
-            "full_name": "Employee updated",
-            "date_of_birth": "1994-04-05",
-            "salary": 1001,
-            "department_id": 42
-        }
-        response = client.put(f"/api/v1/employees/{emp_id}", json=data)
-        assert response.status_code == 400
-        assert response.json["message"] == "Not valid department id"
+    # def test_employees_put_with_id_nonexistent_department_id(self):
+    #     """
+    #     Test put request with incorrect data (wrong dep_id).
+    #     """
+    #     client = create_app().test_client()
+    #     emp_id = 1
+    #     data = {
+    #         "full_name": "Employee updated",
+    #         "date_of_birth": "1994-04-05",
+    #         "salary": 1001,
+    #         "department_id": 42
+    #     }
+    #     response = client.put(f"/api/v1/employees/{emp_id}", json=data)
+    #     assert response.status_code == 400
+    #     assert response.json["message"] == "Not valid department id"
 
     # Tests for DELETE requests
     def test_employees_delete_without_id(self):
