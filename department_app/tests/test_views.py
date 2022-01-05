@@ -131,6 +131,7 @@ def test_create_employee_for_department_post(module_app, mclient, server):
     """
     Test '/departments/{dep_id}/employees' route for post request
     """
+    time.sleep(2)
     data = {
         "full_name": "New Employee",
         "date_of_birth": "1999-05-04",
