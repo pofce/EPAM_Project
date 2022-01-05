@@ -11,8 +11,8 @@ class DepartmentSchema(SQLAlchemyAutoSchema):
     Marshmallow-SQLAlchemy schema for serializing/deserializing
     department related data.
     """
-    @staticmethod
-    def get_avg_salary(obj):
+
+    def get_avg_salary(self, obj):
         """Method to serialize the calculated average salary data on the fly."""
         return ser.DepartmentServices.get_avg_salary(obj)
 
