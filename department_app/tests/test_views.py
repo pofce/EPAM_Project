@@ -76,7 +76,13 @@ def server(module_app):
     requests.post("http://localhost:5000/shutdown")
 
 
+# testing department views
+
+
 def test_departments_list_view_get(module_app, mclient, server):
+    """
+    Test '/departments' route for get request
+    """
     time.sleep(2)
     response = mclient.get("/departments")
     assert response.status_code == 200
@@ -84,32 +90,47 @@ def test_departments_list_view_get(module_app, mclient, server):
 
 
 def test_departments_list_view_post(module_app, mclient, server):
-    data = {"title": "Dep 3"}
+    """
+    Test '/departments' route for post request
+    """
+    data = {"title": "PHP"}
     response = mclient.post("/departments", data=data, follow_redirects=True)
     assert response.status_code == 200
     assert b"created successfully" in response.data
 
 
 def test_departments_list_view_post_wrong_data(module_app, mclient, server):
-    data = {"title": "De"}
+    """
+    Test '/departments' route for get request with wrong data
+    """
+    data = {"title": "D"}
     response = mclient.post("/departments", data=data, follow_redirects=True)
     assert response.status_code == 200
     assert b"must be between 3 and 128 characters long" in response.data
 
 
 def test_department_detail_view_get(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}' route for get request
+    """
     response = mclient.get("/departments/1")
     assert response.status_code == 200
     assert b"Python" in response.data
 
 
 def test_department_detail_view_get_wrong_id(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}' route for get request with wrong "dep_id"
+    """
     response = mclient.get("/departments/42")
     assert response.status_code == 404
     assert b"not found" in response.data
 
 
 def test_create_employee_for_department_post(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/employees' route for post request
+    """
     data = {
         "full_name": "New Employee",
         "date_of_birth": "1999-05-04",
@@ -123,8 +144,11 @@ def test_create_employee_for_department_post(module_app, mclient, server):
 
 
 def test_create_employee_for_department_post_wrong_data(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/employees' route for post request with wrong data
+    """
     data = {
-        "full_name": "New Employee 2",
+        "full_name": "Employee New",
         "date_of_birth": "1999-05-04",
         "salary": 0,
     }
@@ -136,17 +160,26 @@ def test_create_employee_for_department_post_wrong_data(module_app, mclient, ser
 
 
 def test_department_edit_view_get(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/edit' route for get request
+    """
     response = mclient.get("/departments/1/edit")
     assert response.status_code == 200
 
 
 def test_department_edit_view_get_wrong_id(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/edit' route for get request with wrong "dep_id"
+    """
     response = mclient.get("/departments/42/edit")
     assert response.status_code == 404
     assert b"not found" in response.data
 
 
 def test_department_edit_view_post(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/edit' route for post request
+    """
     data = {"title": "Python UPD"}
     response = mclient.post("/departments/1/edit", data=data, follow_redirects=True)
     assert response.status_code == 200
@@ -154,6 +187,9 @@ def test_department_edit_view_post(module_app, mclient, server):
 
 
 def test_department_edit_view_post_fails_validation(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/edit' route for post request with wrong data
+    """
     data = {"title": "P"}
     response = mclient.post("/departments/1/edit", data=data, follow_redirects=True)
     assert response.status_code == 200
@@ -161,6 +197,9 @@ def test_department_edit_view_post_fails_validation(module_app, mclient, server)
 
 
 def test_department_edit_view_post_duplicate_name(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/edit' route for post request with wrong data
+    """
     data = {"title": "C++"}
     response = mclient.post("/departments/1/edit", data=data, follow_redirects=True)
     assert response.status_code == 200
@@ -168,12 +207,18 @@ def test_department_edit_view_post_duplicate_name(module_app, mclient, server):
 
 
 def test_department_delete_view_get(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/delete' route for get request
+    """
     response = mclient.get("/departments/1/delete", follow_redirects=True)
     assert response.status_code == 200
     assert b"successfully." in response.data
 
 
 def test_department_delete_view_get_wrong_id(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/delete' route for get request wit wrong dep_id
+    """
     response = mclient.get("/departments/42/delete")
     assert response.status_code == 404
     assert b"not found" in response.data
