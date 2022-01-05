@@ -228,12 +228,18 @@ def test_department_delete_view_get_wrong_id(module_app, mclient, server):
 
 
 def test_employees_list_view_get(module_app, mclient, server):
+    """
+    Test '/employees' route for get request
+    """
     response = mclient.get("/employees")
     assert response.status_code == 200
     assert b"Employees" in response.data
 
 
 def test_employees_list_view_post(module_app, mclient, server):
+    """
+    Test '/employees' route for post request
+    """
     data = {
         "full_name": "New Employee",
         "date_of_birth": "1999-05-04",
@@ -245,6 +251,9 @@ def test_employees_list_view_post(module_app, mclient, server):
 
 
 def test_employees_list_view_post_wrong_data(module_app, mclient, server):
+    """
+    Test '/employees' route for post request with wrong data
+    """
     data = {
         "full_name": "E",
         "date_of_birth": "1999-05-04",
@@ -257,17 +266,26 @@ def test_employees_list_view_post_wrong_data(module_app, mclient, server):
 
 
 def test_employee_edit_view_get(module_app, mclient, server):
+    """
+    Test '/employees/{emp_id}/edit' route for get request
+    """
     response = mclient.get("/employees/3/edit")
     assert response.status_code == 200
 
 
 def test_employee_edit_view_get_wrong_id(module_app, mclient, server):
+    """
+    Test '/employees/{emp_id}/edit' route for get request with wrong "emp_id"
+    """
     response = mclient.get("/employees/42/edit")
     assert response.status_code == 404
     assert b"not found" in response.data
 
 
 def test_employee_edit_view_post(module_app, mclient, server):
+    """
+    Test '/employees/{emp_id}/edit' route for post request
+    """
     data = {
         "full_name": "Employee Update",
         "date_of_birth": "1999-05-04",
@@ -279,6 +297,9 @@ def test_employee_edit_view_post(module_app, mclient, server):
 
 
 def test_employee_edit_view_post_fails_validation(module_app, mclient, server):
+    """
+    Test '/employees/{emp_id}/edit' route for post request with bad data
+    """
     data = {
         "full_name": "E",
         "date_of_birth": "1999-05-04",
@@ -291,18 +312,27 @@ def test_employee_edit_view_post_fails_validation(module_app, mclient, server):
 
 
 def test_employee_delete_view_get_wrong_id(module_app, mclient, server):
+    """
+    Test '/employees/{emp_id}/edit' route for get request with wrong "emp_id"
+    """
     response = mclient.get("/employees/42/delete")
     assert response.status_code == 404
     assert b"not found" in response.data
 
 
 def test_employees_search_view_without_dep_id_one_date(module_app, mclient, server):
+    """
+    Test '/employees/search' route for get request with 1 argument
+    """
     response = mclient.get("/employees/search?date_of_birth=1994-04-05")
     assert response.status_code == 200
     assert b"Employees" in response.data
 
 
 def test_employees_search_view_without_dep_id_two_dates(module_app, mclient, server):
+    """
+    Test '/employees/search' route for get request with 2 arguments
+    """
     response = mclient.get(
         "/employees/search?date_of_birth=1994-04-05&date_for_interval=2000-01-01"
     )
@@ -311,12 +341,18 @@ def test_employees_search_view_without_dep_id_two_dates(module_app, mclient, ser
 
 
 def test_employees_search_view_with_dep_id_one_date(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/employees/search' route for get request with 1 argument
+    """
     response = mclient.get("/departments/3/employees/search?date_of_birth=1994-04-05")
     assert response.status_code == 200
     assert b"Employees" in response.data
 
 
 def test_employees_search_view_with_dep_id_two_dates(module_app, mclient, server):
+    """
+    Test '/departments/{dep_id}/employees/search' route for get request with 2 arguments
+    """
     response = mclient.get(
         "/departments/3/employees/search?date_of_birth=1994-04-05&date_for_interval=2000-01-01"
     )
@@ -327,6 +363,9 @@ def test_employees_search_view_with_dep_id_two_dates(module_app, mclient, server
 def test_employees_search_view_with_invalid_dep_id_two_dates(
     module_app, mclient, server
 ):
+    """
+    Test '/departments/{dep_id}/employees/search' route for get request with 2 arguments and wrong "dep_id"
+    """
     response = mclient.get(
         "/departments/42/employees/search?date_of_birth=1994-04-05&date_for_interval=2000-01-01"
     )
