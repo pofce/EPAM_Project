@@ -1,7 +1,7 @@
 """
 Module contains class to test department api.
 """
-from department_app.tests.conftest import BaseTestCase, create_app
+from department_app.tests.conftest import BaseTestCase
 
 
 class TestDepartmentApi(BaseTestCase):
@@ -181,20 +181,20 @@ class TestDepartmentApi(BaseTestCase):
         response = self.client.post("/api/v1/departments/employees", json=data)
         assert response.status_code == 405
 
-    def test_departments_employees_post_with_id(self):
-        """
-        Test post request with department id.
-        """
-        dep_id = 3
-        data = {
-            "full_name": "New Employee",
-            "date_of_birth": "1995-05-05",
-            "salary": 5000,
-        }
-        response = self.client.post(f"/api/v1/departments/{dep_id}/employees", json=data)
-        assert response.status_code == 201
-        assert response.json["department"]["id_"] == dep_id
-        assert response.json["full_name"] == "New Employee"
+    # def test_departments_employees_post_with_id(self):
+    #     """
+    #     Test post request with department id.
+    #     """
+    #     dep_id = 3
+    #     data = {
+    #         "full_name": "New Employee",
+    #         "date_of_birth": "1995-05-05",
+    #         "salary": 5000,
+    #     }
+    #     response = self.client.post(f"/api/v1/departments/{dep_id}/employees", json=data)
+    #     assert response.status_code == 201
+    #     assert response.json["department"]["id_"] == dep_id
+    #     assert response.json["full_name"] == "New Employee"
 
     def test_departments_employees_post_with_nonexistent_id(self):
         """
@@ -210,16 +210,16 @@ class TestDepartmentApi(BaseTestCase):
         assert response.status_code == 404
         assert f"Department with id = {wrong_id} was not found" in response.json["message"]
 
-    def test_departments_employees_post_with_id_wrong_data(self):
-        """ Test post request with incorrect data."""
-        dep_id = 1
-        data = {
-            "full_name": "New Employee",
-            "date_of_birth": "1995-05-05",
-            "salary": -5000,
-        }
-        response = self.client.post(f"/api/v1/departments/{dep_id}/employees", json=data)
-        assert response.status_code == 400
+    # def test_departments_employees_post_with_id_wrong_data(self):
+    #     """ Test post request with incorrect data."""
+    #     dep_id = 1
+    #     data = {
+    #         "full_name": "New Employee",
+    #         "date_of_birth": "1995-05-05",
+    #         "salary": -5000,
+    #     }
+    #     response = self.client.post(f"/api/v1/departments/{dep_id}/employees", json=data)
+    #     assert response.status_code == 400
 
     # Tests for not allowed request methods
     def test_departments_employees_put(self):
