@@ -1,0 +1,4 @@
+graft department_app/templates
+graft department_app/migrations
+include config.py
+global-exclude *.pyc
