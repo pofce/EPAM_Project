@@ -5,11 +5,12 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+
 # command to run tests
 script:
   - coverage run -m pytest department_app
-  #test coverage
-- coverage report
+#test coverage
+  - coverage report
 
 after_success:
-- coveralls
+  - coveralls
