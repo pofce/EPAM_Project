@@ -141,7 +141,7 @@ def test_department_detail_view_get_wrong_id(module_app, mclient, server):
 #     )
 #     assert response.status_code == 200
 #     assert b"successfully" in response.data
-
+#
 
 def test_create_employee_for_department_post_wrong_data(module_app, mclient, server):
     """
