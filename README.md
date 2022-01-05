@@ -2,7 +2,6 @@
 External course Python Project
 
 ## Description
-
 A simple web application for managing departments and employees. Uses REST-API
 for CRUD operations. Allows to:
 
