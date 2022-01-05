@@ -127,21 +127,21 @@ def test_department_detail_view_get_wrong_id(module_app, mclient, server):
     assert b"not found" in response.data
 
 
-def test_create_employee_for_department_post(module_app, mclient, server):
-    """
-    Test '/departments/{dep_id}/employees' route for post request
-    """
-    time.sleep(2)
-    data = {
-        "full_name": "New Employee",
-        "date_of_birth": "1999-05-04",
-        "salary": 555,
-    }
-    response = mclient.post(
-        "/departments/1/employees", data=data, follow_redirects=True
-    )
-    assert response.status_code == 200
-    assert b"successfully" in response.data
+# def test_create_employee_for_department_post(module_app, mclient, server):
+#     """
+#     Test '/departments/{dep_id}/employees' route for post request
+#     """
+#     time.sleep(2)
+#     data = {
+#         "full_name": "New Employee",
+#         "date_of_birth": "1999-05-04",
+#         "salary": 555,
+#     }
+#     response = mclient.post(
+#         "/departments/1/employees", data=data, follow_redirects=True
+#     )
+#     assert response.status_code == 200
+#     assert b"successfully" in response.data
 
 
 def test_create_employee_for_department_post_wrong_data(module_app, mclient, server):
