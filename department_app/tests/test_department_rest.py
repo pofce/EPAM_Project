@@ -9,8 +9,6 @@ class TestDepartmentApi(BaseTestCase):
     Class for department api test cases.
     """
 
-    client = create_app().test_client()
-
     # Tests for GET requests
     def test_departments_get_all(self):
         """

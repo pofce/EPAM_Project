@@ -21,6 +21,7 @@ class BaseTestCase(unittest.TestCase):
         self.app_context.push()
         db.create_all()
         populate_bd()
+        self.client = self.app.test_client()
 
     def tearDown(self):
         """
