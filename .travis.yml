@@ -1,6 +1,8 @@
 language: python
 python:
-  - "python-3.10-dev.tar.bz2"
+  - "3.8"
+os:
+  - windows
 
 # command to install dependencies
 install:
