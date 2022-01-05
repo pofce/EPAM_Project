@@ -1,6 +1,5 @@
 from department_app.service import DepartmentServices, EmployeeServices
 from ..tests.conftest import BaseTestCase
-from distutils.version import LooseVersion
 
 
 class TestDepartmentService(BaseTestCase):

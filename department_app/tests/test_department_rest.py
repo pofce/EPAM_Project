@@ -1,9 +1,6 @@
 """
 Module contains class to test department api.
 """
-from distutils.version import LooseVersion
-
-
 from department_app.tests.conftest import BaseTestCase, create_app
 
 

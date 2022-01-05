@@ -1,6 +1,6 @@
 from department_app.service import EmployeeServices
 from ..tests.conftest import BaseTestCase
-from distutils.version import LooseVersion
+
 from datetime import date
 from sqlalchemy.exc import IntegrityError
 

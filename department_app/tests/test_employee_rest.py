@@ -2,7 +2,6 @@
 Module contains class to test employee api.
 """
 
-
 from department_app.tests.conftest import BaseTestCase, create_app
 
 
