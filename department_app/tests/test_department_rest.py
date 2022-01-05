@@ -187,7 +187,7 @@ class TestDepartmentApi(BaseTestCase):
         """
         Test post request with department id.
         """
-        dep_id = 1
+        dep_id = 3
         data = {
             "full_name": "New Employee",
             "date_of_birth": "1995-05-05",
@@ -200,7 +200,7 @@ class TestDepartmentApi(BaseTestCase):
 
     def test_departments_employees_post_with_nonexistent_id(self):
         """
-        Test post request with incorrect data (nonexistent department id)..
+        Test post request with incorrect data (nonexistent department id).
         """
         wrong_id = 42
         data = {
