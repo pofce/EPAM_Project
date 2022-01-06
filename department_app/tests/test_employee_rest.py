@@ -67,7 +67,7 @@ class TestDEmployeeApi(BaseTestCase):
     #     """
     #     Test post request with incorrect data (wrong dep_id).
     #     """
-    #     client = create_app().test_client()
+    #
     #     data = {
     #         "full_name": "New Employee",
     #         "date_of_birth": "1994-04-05",
@@ -138,15 +138,15 @@ class TestDEmployeeApi(BaseTestCase):
 
     def test_employees_put_with_id_incomplete_data(self):
         """
-        Test put request with incorrect data.
+        Test put request with correct data.
         """
         emp_id = 1
         data = {
-            "full_name": "Employee 1 updated",
+            "full_name": "Employee updated",
             "date_of_birth": "1994-04-05",
         }
         response = self.client.put(f"/api/v1/employees/{emp_id}", json=data)
-        assert response.status_code == 400
+        assert response.status_code == 200
 
     # Tests for DELETE requests
     def test_employees_delete_without_id(self):
