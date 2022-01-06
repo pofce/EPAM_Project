@@ -47,8 +47,7 @@ class EmployeeForm(FlaskForm):
 
     salary = IntegerField(
         '',
-        validators=[DataRequired('Salary is required'),
-                    NumberRange(min=0)],
+        validators=[DataRequired('Salary is required'), NumberRange(min=0)],
         render_kw={'placeholder': 'Employee salary'}
     )
 

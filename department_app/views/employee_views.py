@@ -91,7 +91,7 @@ def create_employee(dep_id):
     )
 
 
-@bp.route('/employees/<int:emp_id>/edit', methods=['GET', 'POST'])
+@bp.route('/employees/<int:emp_id>/edit/<int:from_dep>', methods=['GET', 'POST'])
 def edit_employee(emp_id, from_dep=0):
     """
     On GET request renders the "employees_list.html" template with
@@ -130,13 +130,23 @@ def edit_employee(emp_id, from_dep=0):
     department = client.get(
         f'{BASE_URL}/api/v1/departments/{response_data["department_id"]}'
     ).json()
+    if from_dep:
+        return render_template(
+            'department_details.html',
+            department=department,
+            employees=department['employees'],
+            emp_id=emp_id,
+            form=form,
+            action='edit',
+            from_dep=from_dep
+        )
+    employees = client.get(f'{BASE_URL}/api/v1/employees').json()
     return render_template(
-        'department_details.html',
-        department=department,
-        employees=department['employees'],
-        emp_id=emp_id,
+        'employees_list.html',
+        employees=employees,
         form=form,
-        action='edit'
+        action='edit',
+        emp_id=emp_id
     )
 
 

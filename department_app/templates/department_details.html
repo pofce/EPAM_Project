@@ -11,7 +11,7 @@
         {% endif %}
         {% if action == 'edit' %}
             <h3>Edit selected employee</h3>
-            <form class="form" action="{{ url_for('views.edit_employee', emp_id=emp_id) }}" method="post">
+            <form class="form" action="{{ url_for('views.edit_employee', emp_id=emp_id, from_dep=department.id_) }}" method="post">
         {% else %}
             <h3>Add new employee to {{ department.title }}:</h3>
             <form class="form" action="{{ url_for('views.create_employee', dep_id=department.id_) }}" method="post">
@@ -86,7 +86,7 @@
                         <td>{{ employee.date_of_birth }}</td>
                         <td>{{ employee.salary }}</td>
                         <td>
-                            <a href="{{ url_for('views.edit_employee', emp_id=employee.id_)}}">
+                            <a href="{{ url_for('views.edit_employee', emp_id=employee.id_, from_dep=department.id_)}}">
                                 <button type="button" class="btn btn-secondary">Edit</button>
                             </a>
                         </td>

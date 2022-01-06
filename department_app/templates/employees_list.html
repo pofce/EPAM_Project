@@ -10,8 +10,15 @@
         {% if form.full_name.errors -%}
             <div class="alert alert-danger" role="alert"> {{ form.full_name.errors[0] }} </div>
         {% endif %}
-    <h3>Add employee:</h3>
-    <form class="form" method="post" action="{{ url_for(request.endpoint, emp_id=emp_id, from_dep=from_dep) }}">
+
+         {% if action == 'edit' %}
+            <h3>Edit selected employee</h3>
+            <form class="form" action="{{ url_for('views.edit_employee', emp_id=emp_id, from_dep=0) }}" method="post">
+        {% else %}
+            <h3>Add employee:</h3>
+            <form class="form" method="post" action="{{ url_for(request.endpoint, emp_id=emp_id) }}">
+        {% endif %}
+
         {{ form.hidden_tag() }}
         <table class="table">
             <thead>
@@ -82,7 +89,7 @@
                             <a href="{{ url_for('views.view_department_details', dep_id=employee.department.id_) }}">{{ employee.department.title }}</a>
                         </td>
                         <td>
-                            <a href="{{ url_for('views.edit_employee', emp_id=employee.id_)}}">
+                            <a href="{{ url_for('views.edit_employee', emp_id=employee.id_, from_dep=0)}}">
                                 <button type="button" class="btn btn-secondary">Edit</button>
                             </a>
                         </td>

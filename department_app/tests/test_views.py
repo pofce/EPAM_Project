@@ -271,7 +271,7 @@ def test_employee_edit_view_get(module_app, mclient, server):
     """
     Test '/employees/{emp_id}/edit' route for get request.
     """
-    response = mclient.get("/employees/3/edit")
+    response = mclient.get("/employees/3/edit/0")
     assert response.status_code == 200
 
 
@@ -279,7 +279,7 @@ def test_employee_edit_view_get_wrong_id(module_app, mclient, server):
     """
     Test '/employees/{emp_id}/edit' route for get request with wrong "emp_id".
     """
-    response = mclient.get("/employees/42/edit")
+    response = mclient.get("/employees/42/edit/0")
     assert response.status_code == 404
     assert b"not found" in response.data
 
@@ -294,7 +294,7 @@ def test_employee_edit_view_post(module_app, mclient, server):
         "salary": 90000,
         "department_id": 1,
     }
-    response = mclient.post("/employees/3/edit", data=data, follow_redirects=True)
+    response = mclient.post("/employees/3/edit/0", data=data, follow_redirects=True)
     assert response.status_code == 200
 
 
@@ -308,7 +308,7 @@ def test_employee_edit_view_post_fails_validation(module_app, mclient, server):
         "salary": 555,
         "department_id": 2,
     }
-    response = mclient.post("/employees/3/edit", data=data, follow_redirects=True)
+    response = mclient.post("/employees/3/edit/0", data=data, follow_redirects=True)
     assert response.status_code == 200
     assert b"Field must be between 6 and 128 characters long." in response.data
 
