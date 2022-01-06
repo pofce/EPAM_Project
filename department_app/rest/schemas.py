@@ -32,14 +32,14 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
     Marshmallow-SQLAlchemy schema for serializing/deserializing
     employee related data.
     """
-    @staticmethod
-    def validate_full_name(full_name: str):
-        """Method checks if entered full_name is correct on the fly."""
-        if not full_name.replace(" ", "").isalpha() or len(full_name.split()) != 2:
-            raise ValidationError('Wrong full name')
+    # @staticmethod
+    # def validate_full_name(full_name: str):
+    #     """Method checks if entered full_name is correct on the fly."""
+    #     if not full_name.replace(" ", "").isalpha() or len(full_name.split()) != 2:
+    #         raise ValidationError('Wrong full name')
 
     full_name = fields.String(required=True, error_messages={'required': 'full name is required'},
-                              validate=[validate_full_name, validate.Length(min=6, max=128)])
+                              validate=[validate.Length(min=6, max=128)])
     salary = fields.Integer(required=True, error_messages={'required': 'salary is required'},
                             validate=validate.Range(min=0))
     department_id = fields.Integer(required=True,

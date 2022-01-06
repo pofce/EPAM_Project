@@ -37,31 +37,31 @@ class TestDEmployeeApi(BaseTestCase):
         assert f"Employee with id = {wrong_id} was not found" in response.json["message"]
 
     # Tests for POST requests
-    # def test_employees_post(self):
-    #     """
-    #     Test post request with correct data.
-    #     """
-    #     data = {
-    #         "full_name": "New Employee",
-    #         "date_of_birth": "1994-04-05",
-    #         "salary": 500,
-    #         "department_id": 1,
-    #     }
-    #     response = self.client.post("/api/v1/employees", json=data)
-    #     assert response.status_code == 201
-    #     assert response.json["salary"] == 500
+    def test_employees_post(self):
+        """
+        Test post request with correct data.
+        """
+        data = {
+            "full_name": "New Employee",
+            "date_of_birth": "1994-04-05",
+            "salary": 500,
+            "department_id": 1,
+        }
+        response = self.client.post("/api/v1/employees", json=data)
+        assert response.status_code == 201
+        assert response.json["salary"] == 500
 
-    # def test_employees_post_wrong_data(self):
-    #     """
-    #     Test post request with incorrect data.
-    #     """
-    #     data = {
-    #         "full_name": "New Employee",
-    #         "date_of_birth": "Not a Date",
-    #         "salary": 500,
-    #     }
-    #     response = self.client.post("/api/v1/employees", json=data)
-    #     assert response.status_code == 400
+    def test_employees_post_wrong_data(self):
+        """
+        Test post request with incorrect data.
+        """
+        data = {
+            "full_name": "New Employee",
+            "date_of_birth": "Not a Date",
+            "salary": 500,
+        }
+        response = self.client.post("/api/v1/employees", json=data)
+        assert response.status_code == 400
 
     # def test_employees_post_nonexistent_department_id(self):
     #     """
@@ -106,20 +106,20 @@ class TestDEmployeeApi(BaseTestCase):
         response = self.client.put("/api/v1/employees/", json=data)
         assert response.status_code == 405
 
-    # def test_employees_put_with_id(self):
-    #     """
-    #     Test put request with correct data.
-    #     """
-    #     emp_id = 1
-    #     data = {
-    #         "full_name": "Employee updated",
-    #         "date_of_birth": "1994-04-05",
-    #         "salary": 1001,
-    #         "department_id": 1,
-    #     }
-    #     response = self.client.put(f"/api/v1/employees/{emp_id}", json=data)
-    #     assert response.status_code == 200
-    #     assert response.json["full_name"] == "Employee updated"
+    def test_employees_put_with_id(self):
+        """
+        Test put request with correct data.
+        """
+        emp_id = 1
+        data = {
+            "full_name": "Employee updated",
+            "date_of_birth": "1994-04-05",
+            "salary": 1001,
+            "department_id": 1,
+        }
+        response = self.client.put(f"/api/v1/employees/{emp_id}", json=data)
+        assert response.status_code == 200
+        assert response.json["full_name"] == "Employee updated"
 
     def test_employees_put_with_nonexistent_id(self):
         """
@@ -136,17 +136,17 @@ class TestDEmployeeApi(BaseTestCase):
         assert response.status_code == 404
         assert f"Employee with id {wrong_id} not found" in response.json["message"]
 
-    # def test_employees_put_with_id_incomplete_data(self):
-    #     """
-    #     Test put request with incorrect data.
-    #     """
-    #     emp_id = 1
-    #     data = {
-    #         "full_name": "Employee 1 updated",
-    #         "date_of_birth": "1994-04-05",
-    #     }
-    #     response = self.client.put(f"/api/v1/employees/{emp_id}", json=data)
-    #     assert response.status_code == 400
+    def test_employees_put_with_id_incomplete_data(self):
+        """
+        Test put request with incorrect data.
+        """
+        emp_id = 1
+        data = {
+            "full_name": "Employee 1 updated",
+            "date_of_birth": "1994-04-05",
+        }
+        response = self.client.put(f"/api/v1/employees/{emp_id}", json=data)
+        assert response.status_code == 400
 
     # Tests for DELETE requests
     def test_employees_delete_without_id(self):
