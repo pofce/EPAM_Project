@@ -1,6 +1,6 @@
 # pylint: disable=R0903
 """Module contains serializer schemas for Department and Employee classes."""
-from marshmallow import fields, validate, ValidationError
+from marshmallow import fields, validate, ValidationError, validates
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 import department_app.models as model
@@ -32,14 +32,17 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
     Marshmallow-SQLAlchemy schema for serializing/deserializing
     employee related data.
     """
-    # @staticmethod
-    # def validate_full_name(full_name: str):
-    #     """Method checks if entered full_name is correct on the fly."""
-    #     if not full_name.replace(" ", "").isalpha() or len(full_name.split()) != 2:
-    #         raise ValidationError('Wrong full name')
 
-    full_name = fields.String(required=True, error_messages={'required': 'full name is required'},
+    full_name = fields.String(required=True, error_messages={'required': 'full name is required',
+                                                             'validate_full_name': 'Wrong full name'},
                               validate=[validate.Length(min=6, max=128)])
+
+    @validates('full_name')
+    def validate_full_name(self, full_name: str):
+        """Method checks if entered full_name is correct on the fly."""
+        if not full_name.replace(" ", "").isalpha() or len(full_name.split()) != 2:
+            raise ValidationError('Wrong full name')
+
     salary = fields.Integer(required=True, error_messages={'required': 'salary is required'},
                             validate=validate.Range(min=0))
     department_id = fields.Integer(required=True,

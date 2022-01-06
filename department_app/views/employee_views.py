@@ -123,10 +123,9 @@ def edit_employee(emp_id, from_dep=0):
         if response.status_code == 200:
             flash("Employee updated successfully.", category='success')
             return (
-                redirect(url_for("views.view_employees_list"))
-                if not from_dep
-                else
-                redirect(url_for("views.view_department_details", dep_id=data["department_id"])))
+                redirect(url_for("views.view_employees_list")) if from_dep == 0 else
+                redirect(url_for("views.view_department_details", dep_id=data["department_id"]))
+            )
         flash(response.json()["message"], category='danger')
     department = client.get(
         f'{BASE_URL}/api/v1/departments/{response_data["department_id"]}'

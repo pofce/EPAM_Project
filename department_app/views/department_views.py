@@ -81,8 +81,8 @@ def edit_department(dep_id):
             return redirect(url_for("views.edit_department", dep_id=dep_id))
         response = client.put(f"{BASE_URL}/api/v1/departments/{dep_id}", json=data)
         if response.status_code == 200:
-            flash("Department updated successfully.", category='danger')
-            return redirect(url_for("views.edit_department", dep_id=dep_id))
+            flash("Department updated successfully.", category='success')
+            return redirect(url_for('views.departments_list_view'))
         flash(response.json()["message"], category='danger')
     departments = client.get(f"{BASE_URL}/api/v1/departments").json()
     return render_template(

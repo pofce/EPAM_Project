@@ -1,7 +1,7 @@
 """This module contains class-based forms were done using wtf-forms."""
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, IntegerField, DateField
-from wtforms.validators import DataRequired, NumberRange, Length
+from wtforms.validators import DataRequired, NumberRange, Length, ValidationError
 
 
 class DepartmentForm(FlaskForm):
@@ -15,6 +15,12 @@ class DepartmentForm(FlaskForm):
         render_kw={'placeholder': 'Department name'}
     )
     submit = SubmitField('Save department')
+
+
+def validate_full_name(form, full_name):
+    """Method checks if entered full_name is correct on the fly."""
+    if not full_name.data.replace(" ", "").isalpha() or len(full_name.data.split()) != 2:
+        raise ValidationError('Incorrect employee name')
 
 
 class EmployeeForm(FlaskForm):
@@ -33,7 +39,7 @@ class EmployeeForm(FlaskForm):
 
     full_name = StringField(
         '',
-        validators=[DataRequired('Name is required'), Length(min=6, max=128)],
+        validators=[DataRequired('Name is required'), Length(min=6, max=128), validate_full_name],
         render_kw={'placeholder': 'Employee name'}
     )
 
@@ -46,7 +52,9 @@ class EmployeeForm(FlaskForm):
         render_kw={'placeholder': 'Employee salary'}
     )
 
-    department_id = SelectField('', validators=[DataRequired('Department id is required')])
+    department_id = SelectField(
+        '', validators=[DataRequired('Department id is required')]
+    )
     submit = SubmitField('Save employee')
 
 

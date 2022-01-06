@@ -3,9 +3,13 @@
 
 {% block title %}Employees{% endblock %}
 
+
 {% block app_content %}
     <h1 style="text-align: center">{{  'Employees sorted by date of birth' if action == 'search_result' else 'Employees'  }}</h1>
     {% if form %}
+        {% if form.full_name.errors -%}
+            <div class="alert alert-danger" role="alert"> {{ form.full_name.errors[0] }} </div>
+        {% endif %}
     <h3>Add employee:</h3>
     <form class="form" method="post" action="{{ url_for(request.endpoint, emp_id=emp_id, from_dep=from_dep) }}">
         {{ form.hidden_tag() }}
