@@ -1,3 +1,4 @@
+"""Module contains the view functions for departments."""
 import requests as client
 from flask import render_template, request, redirect, flash, url_for, abort
 

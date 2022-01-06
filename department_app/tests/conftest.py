@@ -3,15 +3,16 @@ This module defines the BaseTestCase class
 """
 import unittest
 
+from config import TestConfig
 from department_app import create_app, db
 from department_app.models.population import populate_bd
-from config import TestConfig
 
 
 class BaseTestCase(unittest.TestCase):
     """
     Base test case class
     """
+
     def setUp(self):
         """
         Execute before every test case

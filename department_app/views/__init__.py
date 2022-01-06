@@ -1,3 +1,4 @@
+# pylint: disable=R0401
 """
 Module contains the definition of the blueprint for views.
 

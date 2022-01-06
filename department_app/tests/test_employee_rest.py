@@ -1,7 +1,7 @@
 """
 Module contains class to test employee api.
 """
-from department_app.tests.conftest import BaseTestCase, create_app
+from department_app.tests.conftest import BaseTestCase
 
 
 class TestDEmployeeApi(BaseTestCase):
@@ -198,14 +198,14 @@ class TestDEmployeeApi(BaseTestCase):
         """
         Test get request with 2 arguments.
         """
-        date_to_search = "1991-01-01"
-        date_to_search_2 = "1999-09-09"
+        date_1 = "1991-01-01"
+        date_2 = "1999-09-09"
         response = self.client.get(
-            f"/api/v1/employees/search?date_of_birth={date_to_search}&date_for_interval={date_to_search_2}"
+            f"/api/v1/employees/search?date_of_birth={date_1}&date_for_interval={date_2}"
         )
         assert response.status_code == 200
         assert all(
-            date_to_search <= emp["date_of_birth"] <= date_to_search_2
+            date_1 <= emp["date_of_birth"] <= date_2
             for emp in response.json
         )
 

@@ -1,4 +1,5 @@
-"""" Module contains Department Service class with methods for DB CRUD operations."""
+# pylint: disable=E1101
+""" Module contains Department Service class with methods for DB CRUD operations."""
 from department_app.models import db, Department
 
 
@@ -67,4 +68,6 @@ class DepartmentServices:
         """
         if not list(department.employees):
             return 0
-        return round(sum(employee.salary for employee in department.employees) / len(list(department.employees)))
+        return round(sum(employee.salary for employee in department.employees) / len(
+            list(department.employees))
+                     )

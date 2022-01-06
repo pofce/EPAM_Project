@@ -1,3 +1,5 @@
+# pylint: disable=W0613
+# pylint: disable=W0621
 """Module contains pytest fixtures to run views tests with"""
 import threading
 import time
@@ -67,9 +69,9 @@ def server(module_app):
         shutdown_server()
         return "Shutting down server ..."
 
-    t = threading.Thread(target=module_app.run)
+    my_thread = threading.Thread(target=module_app.run)
     time.sleep(3)
-    yield t.start()
+    yield my_thread.start()
 
     import requests
 
@@ -364,7 +366,8 @@ def test_employees_search_view_with_invalid_dep_id_two_dates(
     module_app, mclient, server
 ):
     """
-    Test '/departments/{dep_id}/employees/search' route for get request with 2 arguments and wrong "dep_id"
+    Test '/departments/{dep_id}/employees/search' route for get request with 2 arguments and
+    wrong "dep_id"
     """
     response = mclient.get(
         "/departments/42/employees/search?date_of_birth=1994-04-05&date_for_interval=2000-01-01"

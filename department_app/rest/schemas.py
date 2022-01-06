@@ -1,3 +1,4 @@
+# pylint: disable=R0903
 """Module contains serializer schemas for Department and Employee classes."""
 from marshmallow import fields, validate, ValidationError
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
@@ -22,6 +23,7 @@ class DepartmentSchema(SQLAlchemyAutoSchema):
     avg_salary = fields.Method('get_avg_salary')
 
     class Meta:
+        """Meta class"""
         model = model.Department
 
 
@@ -32,6 +34,7 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
     """
     @staticmethod
     def validate_full_name(full_name: str):
+        """Method checks if entered full_name is correct on the fly."""
         if not full_name.replace(" ", "").isalpha() or len(full_name.split()) != 2:
             raise ValidationError('Wrong full name')
 
@@ -39,9 +42,11 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
                               validate=[validate_full_name, validate.Length(min=6, max=128)])
     salary = fields.Integer(required=True, error_messages={'required': 'salary is required'},
                             validate=validate.Range(min=0))
-    department_id = fields.Integer(required=True, error_messages={'required': 'department_id is required'},
+    department_id = fields.Integer(required=True,
+                                   error_messages={'required': 'department_id is required'},
                                    load_only=True)
     department = fields.Nested('DepartmentSchema', exclude=['employees'], dump_only=True)
 
     class Meta:
+        """Meta class"""
         model = model.Employee

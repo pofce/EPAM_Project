@@ -22,7 +22,8 @@ class DepartmentApi(Resource):
         This method is called when GET request is sent to "/api/v1/departments/[<int:id>]" url
         :return:
         if "id" not specified => the list of all departments in json format, status code 200.
-        If "id" specified =>  the department with the specified "id" serialized to json, status code 200.
+        If "id" specified =>  the department with the specified "id" serialized to json,
+        status code 200.
         If invalid "id" => error message, status code 404.
         """
         if dep_id is None:
@@ -44,8 +45,8 @@ class DepartmentApi(Resource):
         json_data = request.get_json(force=True)
         try:
             data = self.dep_schema.load(json_data)
-        except ValidationError as e:
-            return e.messages, 400
+        except ValidationError as exception:
+            return exception.messages, 400
         try:
             new_department = DepartmentServices.create(data)
         except IntegrityError:
@@ -54,8 +55,8 @@ class DepartmentApi(Resource):
 
     def put(self, dep_id):
         """
-        This method is called when GET request is sent to "/api/v1/departments/id" url with json data.
-        Changes name of specified department in database.
+        This method is called when GET request is sent to "/api/v1/departments/id" url
+        with json data. Changes name of specified department in database.
         :return:
         if valid data provided => returns the changed entry serialized to json, status code 200
         if invalid data => returns the error message in json format, status code 400.
@@ -67,8 +68,8 @@ class DepartmentApi(Resource):
             return {'message': f'Department with id = {dep_id} was not found'}, 404
         try:
             data = self.dep_schema.load(json_data)
-        except ValidationError as e:
-            return e.messages, 400
+        except ValidationError as exception:
+            return exception.messages, 400
         try:
             updated_department = DepartmentServices.update(department, data)
         except IntegrityError:
@@ -100,9 +101,10 @@ class DepartmentsEmployeesApi(Resource):
 
     def get(self, dep_id):
         """
-        This method is called when GET request is sent to "/api/v1/departments/[<int:id>]/employees" url
+        This method is called when GET request is sent to "/api/v1/departments/[<int:id>]/employees"
         :return:
-        If "id" is valid => list of employees from department with specified "id" serialized to json, status code 200.
+        If "id" is valid => list of employees from department with specified "id" serialized
+        to json, status code 200.
         If invalid "id" => error message, status code 404.
         """
         department = DepartmentServices.get_by_id(dep_id)
@@ -113,7 +115,8 @@ class DepartmentsEmployeesApi(Resource):
 
     def post(self, dep_id):
         """
-        This method is called when POST request is sent to "/api/v1/departments/[<int:id>]/employees" url with json data.
+        This method is called when POST request is sent to
+        "/api/v1/departments/[<int:id>]/employees" with json data.
         Creates a new employee in specified department in database.
         :return:
         if valid data provided => returns the created entry serialized to json, status code 201
@@ -126,8 +129,8 @@ class DepartmentsEmployeesApi(Resource):
             return {'message': f'Department with id = {dep_id} was not found'}, 404
         try:
             data = self.emp_schema.load(json_data, partial=["department_id"])
-        except ValidationError as e:
-            return e.messages, 400
+        except ValidationError as exception:
+            return exception.messages, 400
         data['department_id'] = dep_id
         new_employee = EmployeeServices.create(data)
         return self.emp_schema.dump(new_employee), 201

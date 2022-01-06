@@ -1,3 +1,4 @@
+"""Module contains the view functions for employees."""
 from datetime import datetime
 
 import requests as client
@@ -127,7 +128,9 @@ def edit_employee(emp_id, from_dep=0):
                 else
                 redirect(url_for("views.view_department_details", dep_id=data["department_id"])))
         flash(response.json()["message"], category='danger')
-    department = client.get(f'{BASE_URL}/api/v1/departments/{response_data["department_id"]}').json()
+    department = client.get(
+        f'{BASE_URL}/api/v1/departments/{response_data["department_id"]}'
+    ).json()
     return render_template(
         'department_details.html',
         department=department,

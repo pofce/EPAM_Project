@@ -1,4 +1,5 @@
-"""" Module contains Employee Service class with methods for DB CRUD operations."""
+# pylint: disable=E1101
+""" Module contains Employee Service class with methods for DB CRUD operations."""
 from department_app.models import db, Employee
 
 

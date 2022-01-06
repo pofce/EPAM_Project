@@ -1,14 +1,18 @@
+# pylint: disable=R0201
+""""Module contains test for EmployeeServices class's methods"""
+from datetime import date
+
+from sqlalchemy.exc import IntegrityError
+
 from department_app.service import EmployeeServices
 from ..tests.conftest import BaseTestCase
-
-from datetime import date
-from sqlalchemy.exc import IntegrityError
 
 
 class TestDepartmentService(BaseTestCase):
     """
     This is the class for department service test cases
     """
+
     def test_get_all(self):
         """
         Test get all employees operation
@@ -130,7 +134,8 @@ class TestDepartmentService(BaseTestCase):
 
     def test_get_by_date_of_birth_from_department_with_interval(self):
         """
-        Test get employees operation which takes all who belong to specific department and were born in interval.
+        Test get employees operation which takes all who belong to specific department and
+        were born in interval.
         """
         dep_id = 1
         test_date1 = date(1991, 1, 1)
@@ -140,4 +145,3 @@ class TestDepartmentService(BaseTestCase):
         )
         assert all(test_date1 <= emp.date_of_birth <= test_date2 for emp in employees)
         assert all(emp.department_id == dep_id for emp in employees)
-

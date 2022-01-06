@@ -1,3 +1,5 @@
+# pylint: disable=R0201
+""""Module contains test for DepartmentServices class's methods"""
 from department_app.service import DepartmentServices, EmployeeServices
 from ..tests.conftest import BaseTestCase
 
@@ -43,7 +45,7 @@ class TestDepartmentService(BaseTestCase):
         """
         Test create department operation with wrong data.
         """
-        with self.assertRaises(TypeError) as context:
+        with self.assertRaises(TypeError):
             DepartmentServices.create(dict(name="Fail"))
 
     def test_update(self):

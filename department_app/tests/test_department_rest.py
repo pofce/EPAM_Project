@@ -1,3 +1,5 @@
+# pylint: disable=R0904
+
 """
 Module contains class to test department api.
 """

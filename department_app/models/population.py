@@ -1,3 +1,4 @@
+# pylint: disable=E1101
 """Module contains a function to populate test data in database."""
 from datetime import date
 from department_app import create_app

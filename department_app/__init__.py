@@ -1,3 +1,4 @@
+# pylint: disable=C0415
 """
 Module containing factory for app merging it with database, blueprints, REST.
 

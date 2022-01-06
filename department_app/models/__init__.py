@@ -1,3 +1,5 @@
+# pylint: disable=E1101
+# pylint: disable=R0903
 """
 Module defines department and employee models using class Model from SQLAlchemy
 """
@@ -12,7 +14,12 @@ class Department(db.Model):
     __tablename__ = 'departments'
     id_: int = db.Column(db.Integer, primary_key=True)
     title: str = db.Column(db.String(128), unique=True, nullable=False)
-    employees = db.relationship('Employee', backref=db.backref('department'), cascade="all,delete", lazy='dynamic')
+    employees = db.relationship(
+        'Employee',
+        backref=db.backref('department'),
+        cascade="all,delete",
+        lazy='dynamic'
+    )
 
 
 class Employee(db.Model):
@@ -23,5 +30,8 @@ class Employee(db.Model):
     full_name: str = db.Column(db.String(128), nullable=False)
     date_of_birth = db.Column(db.Date, nullable=False, index=True)
     salary: int = db.Column(db.Integer, nullable=False, index=True)
-    department_id: int = db.Column(db.Integer, db.ForeignKey('departments.id_'), nullable=False)
-
+    department_id: int = db.Column(
+        db.Integer,
+        db.ForeignKey('departments.id_'),
+        nullable=False
+    )

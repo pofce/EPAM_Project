@@ -25,7 +25,8 @@ class EmployeeApi(Resource):
         This method is called when GET request is sent to "/api/v1/employees/[<int:id>]" url
         :return:
         if "id" not specified => the list of all employees in json format, status code 200.
-        If "id" specified =>  the list of employees from specified department serialized to json, status code 200.
+        If "id" specified =>  the list of employees from specified department serialized to json,
+        status code 200.
         If invalid "id" => error message, status code 404.
         """
         if emp_id is None:
@@ -47,8 +48,8 @@ class EmployeeApi(Resource):
         json_data = request.get_json(force=True)
         try:
             data = self.emp_schema.load(json_data)
-        except ValidationError as e:
-            return e.messages, 400
+        except ValidationError as exception:
+            return exception.messages, 400
         try:
             new_employee = EmployeeServices.create(data)
         except IntegrityError:
@@ -70,8 +71,8 @@ class EmployeeApi(Resource):
             return {'message': f"Employee with id {emp_id} not found"}, 404
         try:
             data = self.emp_schema.load(json_data, partial=True)
-        except ValidationError as e:
-            return e.messages, 400
+        except ValidationError as exception:
+            return exception.messages, 400
         try:
             updated_employee = EmployeeServices.update(employee, data)
         except IntegrityError:
@@ -106,18 +107,18 @@ class EmployeeSearchApi(Resource):
         This method is called when GET request is sent to:
         "/api/v1/employees/search" or
         :return:
-        if "date_for_interval" not specified => the list of all employees who were born on "date_of_birth" in json
-        format, status code 200.
-        If "date_for_interval" specified =>  the list of all employees who were born in interval in json format,
-        status code 200.
+        if "date_for_interval" not specified => the list of all employees who were born on
+        "date_of_birth" in json format, status code 200.
+        If "date_for_interval" specified =>  the list of all employees who were born in interval
+        in json format, status code 200.
         If invalid "date_of_birth" => error message, status code 400.
 
         "/api/v1//departments/<dep_id>/employees/search" urls.
         :return:
-        if "date_for_interval" specified => the list of all employees who were born on "date_of_birth" from specified
-        department in json format, status code 200.
-        if "date_for_interval" not specified => the list of all employees who were born in interval from specified
-        department in json format, status code 200.
+        if "date_for_interval" specified => the list of all employees who were born on
+        "date_of_birth" from specified department in json format, status code 200.
+        if "date_for_interval" not specified => the list of all employees who were born in interval
+        from specified department in json format, status code 200.
         If invalid "dep_id" => error message, status code 404.
         """
         date_of_birth = request.args.get('date_of_birth')

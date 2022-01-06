@@ -1,3 +1,4 @@
+# pylint: disable=E0602
 """Module defines department and employee REST API.."""
 from flask_restful import Api
 
@@ -7,6 +8,7 @@ import department_app.rest.employee_rest
 api = Api(prefix='/api/v1')
 
 """Functions register the routes with the framework using the given endpoints."""
+
 # Department resources
 
 api.add_resource(
