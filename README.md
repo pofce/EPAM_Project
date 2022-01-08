@@ -1,5 +1,5 @@
-[![Build Status] 
-[![Coverage Status] 
+[![Build Status] (https://app.travis-ci.com/github/pofce/EPAM_Project)](https://app.travis-ci.com/github/pofce/EPAM_Project)
+[![Coverage Status] (https://coveralls.io/github/pofce/EPAM_Project)](https://coveralls.io/github/pofce/EPAM_Project)
 # EPAM_Project
 External course Python Project
 
