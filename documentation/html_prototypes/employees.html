@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Departments</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">EpamProject</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link"  href="departments.html">Departments</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="employees.html">Employees</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <div class="container">
+    <h1 style="text-align: center">Employees</h1>
+    <h3>Add employee:</h3>
+    <form class="form" method="post" action="#">
+        <table class="table">
+            <thead>
+            <tr>
+                <th style="padding-left: 25px" colspan="2">Employee Name</th>
+                <th></th>
+                <th style="padding-left: 25px">Date of Birth</th>
+                <th style="padding-left: 25px">Salary</th>
+                <th style="padding-left: 25px">Department</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="2"><input type="text" class="form-control"
+                                       placeholder="Employee Name" required></td>
+                <td></td>
+                <td><input type="date" class="form-control" required></td>
+                <td><input type="text" class="form-control"
+                           placeholder="Salary" required></td>
+                <td>
+                    <select class="form-control" name="department_id">
+                        <option disabled>----</option>
+                        <option value="1">Python</option>
+                        <option value="2">C++</option>
+                        <option value="3">Assembler</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success">Save employee</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+      <h3>Search employees by date of birth</h3>
+      <form class="form-inline" method='get' action="#">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date of birth</th>
+                    <th>Date for interval</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input class="form-control" type="date" id="date_of_birth" name="date_of_birth"
+                           required></td>
+                    <td><input class="form-control" type="date" id="date_for_interval" ,
+                           name="date_for_interval"></td>
+                    <td><button class="btn btn-success" type="submit">Find employees</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+      <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Employee name</th>
+            <th>Date of birth</th>
+            <th>Salary</th>
+            <th>Department</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Vladyslav Radchenko</td>
+            <td>2002-09-09</td>
+            <td>3000</td>
+            <td>
+                <a href="department_detail.html">Python</a>
+            </td>
+            <td>
+                <a href="edit_employees.html">
+                    <button type="button" class="btn btn-secondary">Edit</button>
+                </a>
+            </td>
+            <td><a href="#">
+                <button onclick="return confirm('Are you sure you wish to delete?');" type="button"
+                        class="btn btn-danger">Delete
+                </button>
+            </a></td>
+        </tr>
+        <tr>
+            <td>Emilie Wilson</td>
+            <td>1992-11-27</td>
+            <td>1000</td>
+            <td>
+                <a href="department_detail.html">Python</a>
+            </td>
+            <td>
+                <a href="edit_employees.html">
+                    <button type="button" class="btn btn-secondary">Edit</button>
+                </a>
+            </td>
+            <td><a href="#">
+                <button onclick="return confirm('Are you sure you wish to delete?');" type="button"
+                        class="btn btn-danger">Delete
+                </button>
+            </a></td>
+        </tr>
+        <tr>
+            <td>Lora Palmer</td>
+            <td>1972-07-22</td>
+            <td>1975</td>
+            <td>
+                C++
+            </td>
+            <td>
+                <a href="#">
+                    <button type="button" class="btn btn-secondary">Edit</button>
+                </a>
+            </td>
+            <td><a href="#">
+                <button onclick="return confirm('Are you sure you wish to delete?');" type="button"
+                        class="btn btn-danger">Delete
+                </button>
+            </a></td>
+        </tr>
+        <tr>
+            <td>Samuel Robinson</td>
+            <td>1994-09-01</td>
+            <td>1650</td>
+            <td>
+                Assembler
+            </td>
+            <td>
+                <button type="button" class="btn btn-secondary">Edit</button>
+            </td>
+            <td><a href="#">
+                <button onclick="return confirm('Are you sure you wish to delete?');" type="button"
+                        class="btn btn-danger">Delete
+                </button>
+            </a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
