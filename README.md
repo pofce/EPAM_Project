@@ -29,7 +29,7 @@ for CRUD operations. Allows to:
 8) views - this module includes modules with Web controllers / views
 
 ## Installation
-###First  way:
+### First  way:
 1. Clone this repo:
 
         git clone git clone https://github.com/pofce/EPAM_Project
@@ -46,7 +46,7 @@ for CRUD operations. Allows to:
    [http://127.0.0.1:5000/](http://0.0.0.0:5000/) on your host machine. If it doesn't work try 
    second way of installing.
 
-###Second way:
+### Second way:
 
 1. Clone this repo:
 
@@ -72,7 +72,8 @@ for CRUD operations. Allows to:
     DB_PORT=<your database port>
     ```
 You can set these in .env file as the project uses dotenv module to load 
-environment variables
+environment variables.
+
 6. Run migrations to create database infrastructure:
     ```
     flask db upgrade
