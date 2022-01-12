@@ -30,6 +30,6 @@ if [ ! -f department_app.db ]; then
 	python3 population.py
 fi
 
-echo "Running..."
+echo "Running... "
 sleep 1
 python3 -m flask run
