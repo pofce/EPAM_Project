@@ -1,5 +1,5 @@
 # pylint: disable=E0602
-"""Module defines department and employee REST API.."""
+"""Module defines department and employee REST API."""
 from flask_restful import Api
 
 import department_app.rest.department_rest

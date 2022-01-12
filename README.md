@@ -17,6 +17,75 @@ for CRUD operations. Allows to:
   both among all employees and employees of a particular department.
 - add, update and delete departments and employees.
 
+## Structure
+
+1) errors - module with error handlers
+2) forms - module with forms for html templates
+3) models - this module includes modules with Python classes describing DB models
+4) rest - modules with RESTful service implementation
+5) service - modules with functions to work with DB (CRUD operations)
+6) templates - html templates
+7) tests - modules with unit tests
+8) views - this module includes modules with Web controllers / views
+
+## Installation
+###First  way:
+1. Clone this repo:
+
+        git clone git clone https://github.com/pofce/EPAM_Project
+
+2. Proceed to the EPAM_Project directory:
+ 
+        cd EPAM_Project
+
+3. Run the "install_and_run.sh" script:
+      
+       ./run.sh
+
+4. Once everything has started up, you should be able to access the app with test data added at
+   [http://127.0.0.1:5000/](http://0.0.0.0:5000/) on your host machine. If it doesn't work try 
+   second way of installing.
+
+###Second way:
+
+1. Clone this repo:
+
+        git clone https://github.com/pofce/EPAM_Project
+2. Set up and activate the virtual environment: (optionally)
+    ```
+    virtualenv venv
+    source env/bin/activate
+    ```
+3. Install the requirements:
+    ```
+    pip install -r requirements.txt
+    ```
+4. Configure MySQL database. Open config.py and find:
+    ```
+    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://<DB_PORT>:<DB_PASSWORD>@<DB_HOST>/<DB_USERNAME>"
+    ```
+5. Set the following environment variables:
+    ```
+    DB_USERNAME=<your database username>
+    DB_PASSWORD=<your database password>
+    DB_HOST=<your database host>
+    DB_PORT=<your database port>
+    ```
+You can set these in .env file as the project uses dotenv module to load 
+environment variables
+6. Run migrations to create database infrastructure:
+    ```
+    flask db upgrade
+    ```
+7. Run the project locally:
+    ```
+    python -m flask run
+    ```
+   or
+    ```
+    python wsgi.py
+    ```
+
 ## API endpoints
 
 * "/api/v1/departments"
