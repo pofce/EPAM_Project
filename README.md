@@ -19,14 +19,14 @@ for CRUD operations. Allows to:
 
 ## Structure
 
-1) errors - module with error handlers
-2) forms - module with forms for html templates
-3) models - this module includes modules with Python classes describing DB models
-4) rest - modules with RESTful service implementation
-5) service - modules with functions to work with DB (CRUD operations)
+1) errors - this package includes modules with error handlers
+2) forms - this package includes modules with forms for html templates
+3) models - this package includes modules with Python classes describing DB models
+4) rest - this package includes modules with RESTful service implementation
+5) service - this package includes modules with functions to work with DB (CRUD operations)
 6) templates - html templates
-7) tests - modules with unit tests
-8) views - this module includes modules with Web controllers / views
+7) tests - this package includes modules with unit tests
+8) views - this package includes modules with Web controllers / views
 
 ## Installation
 ### First  way:
